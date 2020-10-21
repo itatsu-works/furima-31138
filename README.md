@@ -1,25 +1,27 @@
 # テーブル設計
 
-##　Userテーブル
-|Column       |Type       |Options      |
-|-------------|-----------|-------------|
-|nickname     |string     |null: false  |
-|email        |string     |null: false  |
-|password     |string     |null: false  |
-|name         |string     |null: false  |
-|kana         |string     |null: false  |
-|birthday     |date       |null: false  |
+##　userテーブル
+|Column                 |Type       |Options      |
+|-----------------------|-----------|-------------|
+|nickname               |string     |null: false  |
+|email                  |string     |null: false  |
+|encrypted_password     |string     |null: false  |
+|last_name              |string     |null: false  |
+|first_name             |string     |null: false  |
+|last_kana              |string     |null: false  |
+|first_kana             |string     |null: false  |
+|birthday               |date       |null: false  |
 
 ### Association
-- has_many :item
-- has_many :sold
+- has_many :items
+- has_many :solds
 
 
-## itemテーブル
+## itemsテーブル
 |Column             |Type           |Options      |
 |-------------------|---------------|-------------|
-|item_name          |string         |null: false  |
-|item_description   |text           |null: false  |
+|name               |string         |null: false  |
+|description        |text           |null: false  |
 |category_id        |integer        |null: false  |
 |status_id          |integer        |null: false  |
 |cost_burden_id     |integer        |null: false  |
@@ -33,8 +35,7 @@
 - has_one :sold
 
 
-## deliveryテーブル
-
+## deliveriesテーブル
 |Column           |Type         |Options      |
 |-----------------|-------------|-------------|
 |post_number      |string       |null: false  |
@@ -49,7 +50,7 @@
 - belongs_to :sold
 
 
-## soldテーブル
+## soldsテーブル
 |Column           |Type         |Options      |
 |-----------------|-------------|-------------|
 |user             |references   |null: false  |
