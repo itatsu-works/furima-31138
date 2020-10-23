@@ -1,6 +1,6 @@
 # テーブル設計
 
-##　userテーブル
+## userテーブル
 |Column                 |Type       |Options      |
 |-----------------------|-----------|-------------|
 |nickname               |string     |null: false  |
