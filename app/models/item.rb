@@ -19,11 +19,8 @@ class Item < ApplicationRecord
     validates :name
     validates :image
   end
-  
+
   validates :days_id, :area_id, :cost_burden_id, :status_id, :category_id, numericality: { other_than: 1 }
 
-  
-  validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-
-
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 end
