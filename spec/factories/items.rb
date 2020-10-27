@@ -8,7 +8,7 @@ FactoryBot.define do
     category_id         { Faker::Number.between(from: 2, to: 11) }
     description         { Faker::Lorem.characters(number: 300) }
     name                { Faker::Lorem.characters(number: 20) }
-    # image               { Faker::Lorem.sentence }
+  
 
     after(:build) do |item|
       item.image.attach(io: File.open('public/images/peach-1.jpg'), filename: 'peach-1.jpg')

@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, only: [:new]
   def index
-    @item = Item.new
   end
 
   def new
