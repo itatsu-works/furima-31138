@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :item
 
   NAME_REGEX = /\A[ぁ-んァ-ン一-龥]/.freeze
   KANA_REGEX = /\A[ァ-ヶー－]+\z/.freeze
