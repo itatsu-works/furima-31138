@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   has_one_attached :image
+  belongs_to :user
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
   belongs_to_active_hash :area
@@ -13,6 +14,7 @@ class Item < ApplicationRecord
     validates :area_id
     validates :cost_burden_id
     validates :status_id
+    validates :category_id
     validates :description
     validates :name
     validates :image
