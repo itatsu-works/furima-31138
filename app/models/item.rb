@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     validates :price
-    validates :days_id
+    validates :day_id
     validates :area_id
     validates :cost_burden_id
     validates :status_id
@@ -20,7 +20,7 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  validates :days_id, :area_id, :cost_burden_id, :status_id, :category_id, numericality: { other_than: 1 }
+  validates :day_id, :area_id, :cost_burden_id, :status_id, :category_id, numericality: { other_than: 1 }
 
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 end
