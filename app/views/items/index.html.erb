@@ -128,7 +128,7 @@
       
       <li class='list'>
         <% @item.each do |item| %>
-        <%= link_to "#" do %>
+        <%= link_to item_path(item.id) do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
 
@@ -155,8 +155,6 @@
         <% end %>
       </li>
 
-      <%# 商品がない場合のダミー %>
-      <%# 商品がある場合は表示されないようにしましょう %>
       <% if @item.count == 0 %>
       <li class='list'>
         <%= link_to '#' do %>
@@ -176,8 +174,6 @@
         <% end %>
       </li>
       <% end %>
-      <%# //商品がある場合は表示されないようにしましょう %>
-      <%# /商品がない場合のダミー %>
     </ul>
   </div>
   <%# /商品一覧 %>
