@@ -2,7 +2,6 @@ window.addEventListener('load', () => {
   const price = document.getElementById("item-price");
   const tax = document.getElementById("add-tax-price");
   const profit = document.getElementById("profit");
-  console.log("ok", price)
 
   price.addEventListener('input', function(){
     const sell_price = price.value;
