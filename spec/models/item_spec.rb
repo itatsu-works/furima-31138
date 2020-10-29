@@ -49,9 +49,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Area must be other than 1')
       end
       it '発送までの日数が空だと登録できない' do
-        @item.days_id = 1
+        @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Days must be other than 1')
+        expect(@item.errors.full_messages).to include('Day must be other than 1')
       end
       it '販売価格が空だと登録できない' do
         @item.price = ''

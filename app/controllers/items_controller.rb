@@ -1,11 +1,12 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, only: [:new]
+  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :params_id, only: [:edit, :show, :update]
+  
   def index
     @item = Item.all.order(created_at: "DESC")
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def new
@@ -13,7 +14,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = Item.new(set_params)
     if @item.save
       redirect_to root_path
     else
@@ -21,15 +22,30 @@ class ItemsController < ApplicationController
     end
   end
 
-  private
-
-  def item_params
-    params.require(:item).permit(:user_id, :price, :days_id, :area_id, :cost_burden_id, :status_id, :category_id, :description, :name, :image).merge(user_id: current_user.id)
+  def edit
+    unless current_user.id == @item.user_id
+      redirect_to root_path
+    end
+    # 購入機能実装後、出品者・出品者以外にかかわらず、ログイン状態のユーザーが、URLを直接入力して売却済み商品の商品情報編集ページへ遷移しようとすると、トップページに遷移すること
+    
   end
 
-  def move_to_index
-    unless user_signed_in?
-      redirect_to user_session_path
+  def update
+    if @item.update(set_params)
+      redirect_to item_path
+    else
+      render :edit
     end
   end
+
+  private
+
+  def params_id
+    @item = Item.find(params[:id])
+  end
+
+  def set_params
+    params.require(:item).permit(:price, :day_id, :area_id, :cost_burden_id, :status_id, :category_id, :description, :name, :image).merge(user_id: current_user.id)
+  end
+
 end
