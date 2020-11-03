@@ -1,5 +1,6 @@
 class SoldsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
+  before_action :sold_user_check, only: [:index]
 
   def index
     sold_item_new
@@ -25,9 +26,13 @@ class SoldsController < ApplicationController
   def sold_item_new
     @sold_item = SoldItem.new
   end
-
   def delivery_params
     params.require(:sold_item).permit(:post_number, :prefecture_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
   end
-  
+  def sold_user_check
+    if current_user.id == find_item.user.id
+      redirect_to root_path
+    end
+  end
+
 end
