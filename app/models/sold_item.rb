@@ -8,17 +8,19 @@ class SoldItem
                   :building, 
                   :phone_number, 
                   :sold_id
-
-  validates :user_id, presence: true
-  validates :item_id,  presence: true
-  validates :post_number,  presence: true
-  validates :prefecture_id, numericality: { other_than: 1 }
-  validates :city,  presence: true
-  validates :address, presence: true
-  validates :phone_number,  presence: true
-
-
+  with_options presence: true do
+    validates :user_id
+    validates :item_id
+    validates :post_number
+    validates :prefecture_id
+    validates :city
+    validates :address
+    validates :phone_number
+  end
   
+  validates :prefecture_id, numericality: { other_than: 1 }
+  validates :post_number, format: { with: /\A{3}[-]\z{4}/ }
+  validates :phone_number,  numericality: { /\A\d{10,11}\z/ }
 
   def save
     sold = Sold.create(item_id:item_id,  user_id: user_id)
