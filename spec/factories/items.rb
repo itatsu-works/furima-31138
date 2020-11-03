@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
     price               { Faker::Number.between(from: 300, to: 9_999_999) }
-    day_id             { Faker::Number.between(from: 2, to: 4) }
+    day_id              { Faker::Number.between(from: 2, to: 4) }
     area_id             { Faker::Number.between(from: 2, to: 48) }
     cost_burden_id      { Faker::Number.between(from: 2, to: 3) }
     status_id           { Faker::Number.between(from: 2, to: 7) }
