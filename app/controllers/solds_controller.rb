@@ -4,22 +4,18 @@ class SoldsController < ApplicationController
   def index
     sold_item_new
     find_item
-
   end
-  
+
   def create
     @sold_item = SoldItem.new(delivery_params)
 
     if @sold_item.valid?
       @sold_item.save
-    redirect_to root_path
+      redirect_to root_path
     else
-      binding.pry
       find_item
-      sold_item_new
-      render 'index'
+      render action: :index
     end
-    
   end
 
   private

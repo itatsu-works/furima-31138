@@ -12,7 +12,7 @@ class SoldItem
   validates :user_id, presence: true
   validates :item_id,  presence: true
   validates :post_number,  presence: true
-  validates :prefecture_id,  presence: true
+  validates :prefecture_id, numericality: { other_than: 1 }
   validates :city,  presence: true
   validates :address, presence: true
   validates :phone_number,  presence: true
