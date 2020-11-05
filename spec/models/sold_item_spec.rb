@@ -47,7 +47,11 @@ RSpec.describe SoldItem, type: :model do
         @sold_item.valid?
         expect(@sold_item.errors.full_messages).to include("Phone number is not a number")
       end
-      
+      it 'tokenが入力されていなければ登録できないこと' do
+        @sold_item.token = nil
+        @sold_item.valid?
+        expect(@sold_item.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end

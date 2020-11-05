@@ -7,7 +7,10 @@ class SoldItem
                   :city, :address, 
                   :building, 
                   :phone_number, 
-                  :sold_id
+                  :sold_id,
+                  :token,
+                  :price
+                  
   with_options presence: true do
     validates :user_id
     validates :item_id
@@ -16,6 +19,7 @@ class SoldItem
     validates :city
     validates :address
     validates :phone_number
+    validates :token
   end
   
   validates :prefecture_id, numericality: { other_than: 1 }
