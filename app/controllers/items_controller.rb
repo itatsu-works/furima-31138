@@ -27,8 +27,6 @@ class ItemsController < ApplicationController
     unless current_user.id == @item.user_id
       redirect_to root_path
     end
-    # 購入機能実装後、出品者・出品者以外にかかわらず、ログイン状態のユーザーが、URLを直接入力して売却済み商品の商品情報編集ページへ遷移しようとすると、トップページに遷移すること
-    
   end
 
   def update
