@@ -1,6 +1,7 @@
 class SoldsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :sold_user_check, only: [:index]
+  before_action :sold_item_check, only: [:index]
 
   def index
     sold_item_new
@@ -36,11 +37,17 @@ class SoldsController < ApplicationController
     end
   end
   def pay_payjp
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: delivery_params[:price],
-        card: delivery_params[:token],
-        currency: 'jpy'
-      )
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: delivery_params[:price],
+      card: delivery_params[:token],
+      currency: 'jpy'
+    )
+  end
+  def sold_item_check
+    find_item
+    unless Sold.where(item_id: @item.id).count == 0
+      redirect_to root_path
+    end
   end
 end

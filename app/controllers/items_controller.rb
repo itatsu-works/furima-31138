@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
   before_action :params_id, only: [:edit, :show, :update, :destroy]
-  
+  before_action :sold_item_check, only: [:edit]
+
   def index
     @item = Item.all.order(created_at: "DESC")
   end
@@ -54,4 +55,9 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:price, :day_id, :area_id, :cost_burden_id, :status_id, :category_id, :description, :name, :image).merge(user_id: current_user.id)
   end
 
+  def sold_item_check
+    unless Sold.where(item_id: @item.id).count == 0
+      redirect_to root_path
+    end
+  end
 end
