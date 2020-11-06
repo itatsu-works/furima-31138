@@ -14,11 +14,8 @@ const pay = () => {
       exp_month: formData.get("sold_item[expiration_month]"),
       exp_year: `20${formData.get("sold_item[expiration_year]")}`,
     };
-    console.log(card)
-    console.log(process.env.PAYJP_PUBLIC_KEY)
 
     Payjp.createToken(card, (status, response) => {
-      console.log(response)
       if (status == 200) {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
