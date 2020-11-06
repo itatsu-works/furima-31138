@@ -1,22 +1,20 @@
 class SoldsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :sold_user_check, only: [:index]
+  before_action :find_item, only: [:index, :create]
   before_action :sold_item_check, only: [:index]
 
   def index
     sold_item_new
-    find_item
   end
 
   def create
-    find_item
     @sold_item = SoldItem.new(delivery_params)
     if @sold_item.valid?
       pay_payjp
       @sold_item.save
       redirect_to root_path
     else
-      find_item
       render action: :index
     end
   end
@@ -45,7 +43,6 @@ class SoldsController < ApplicationController
     )
   end
   def sold_item_check
-    find_item
     unless Sold.where(item_id: @item.id).count == 0
       redirect_to root_path
     end
