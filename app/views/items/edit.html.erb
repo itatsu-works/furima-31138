@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <%# 配送について %>
+
     <div class="items-detail">
       <div class="weight-bold-text question-text">
         <span>配送について</span>
@@ -77,8 +77,6 @@
         <%= f.collection_select(:day_id, Day.all, :id, :name, {}, {class:"select-box", id:"item-scheduled-delivery"}) %>
       </div>
     </div>
-    <%# /配送について %>
-
 
     <div class="sell-price">
       <div class="weight-bold-text question-text">
