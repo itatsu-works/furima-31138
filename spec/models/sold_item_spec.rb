@@ -40,17 +40,22 @@ RSpec.describe SoldItem, type: :model do
       it '電話番号(phone_number)が入力されていなければ保存できない' do
         @sold_item.phone_number = nil
         @sold_item.valid?
-        expect(@sold_item.errors.full_messages).to include("Phone number can't be blank","Phone number is not a number")
+        expect(@sold_item.errors.full_messages).to include("Phone number can't be blank","Phone number is invalid")
       end
       it '電話番号が番号でなければ保存できない' do
         @sold_item.phone_number = 'abcdefghijk'
         @sold_item.valid?
-        expect(@sold_item.errors.full_messages).to include("Phone number is not a number")
+        expect(@sold_item.errors.full_messages).to include("Phone number is invalid")
       end
       it 'tokenが入力されていなければ登録できないこと' do
         @sold_item.token = nil
         @sold_item.valid?
         expect(@sold_item.errors.full_messages).to include("Token can't be blank")
+      end
+      it '電話番号が12桁以上では保存できない' do
+        @sold_item.phone_number = '123456789101'
+        @sold_item.valid?
+        expect(@sold_item.errors.full_messages).to include("Phone number is invalid")
       end
     end
   end
