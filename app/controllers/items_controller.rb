@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
   end
 
   def sold_item_check
-    unless Sold.where(item_id: @item.id).count == 0
+    unless @item.sold.blank?
       redirect_to root_path
     end
   end
